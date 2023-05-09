@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+    max-connections: 20000
+    accept-count: 1000
+    threads:
+      max: 1000
+      min-spare: 30
+
+spring:
+  application:
+    name: demo
+  messages:
+    basename: i18n/messages
+  aop:
+    proxy-target-class: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization.write-dates-as-timestamps: false
+
+ons:
+  rocket-mq:
+    producer:
+      bootstrap-servers: 
+      access-key: 
+      secret-key: 
+      group-id: 
+    consumer:
+      bootstrap-servers: ${ons.rocket-mq.producer.bootstrap-servers}
+      access-key: ${ons.rocket-mq.producer.access-key}
+      secret-key: ${ons.rocket-mq.producer.secret-key}
+      group-id: ${ons.rocket-mq.producer.group-id}
+      thread-num: 1
+      max-cached-amount: 5000
+      max-batch-size: 1
+      max-batch-await-second: 0
